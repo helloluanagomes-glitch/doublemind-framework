@@ -204,55 +204,62 @@ export function SidePanel({ isOpen, onClose, cardData }: SidePanelProps) {
           boxShadow: '-4px 0 24px rgba(0, 0, 0, 0.1)'
         }}
       >
-        {/* Panel Header - Fixed */}
-        <div 
-          className="panel-header flex items-center justify-between"
+                {/* Panel Header - Fixed */}
+        <div
+          className="panel-header"
           style={{
             padding: '24px 32px',
             borderBottom: '1px solid #E0E0E0',
             position: 'sticky',
             top: 0,
             backgroundColor: '#FFFFFF',
-            zIndex: 10
+            zIndex: 50,
           }}
         >
-          <h3 
-            className="panel-title uppercase tracking-tight flex-1"
+          <div
             style={{
-              fontFamily: 'Neue Haas Grotesk Display, system-ui, sans-serif',
-              fontWeight: 700,
-              fontSize: '20px',
-              lineHeight: 1.1,
-              letterSpacing: '-0.02em',
-              color: '#111'
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '16px',
             }}
           >
-            {cardData.title}
-          </h3>
-          <button
-  type="button"
-  onClick={onClose}
-  aria-label="Close panel"
-  className="close-button info-panel-close flex-shrink-0"
-  style={{
-    width: 40,
-    height: 40,
-    borderRadius: 4,
-    border: "2px solid #E95F9C",
-    backgroundColor: "#E95F9C",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    transition: "background-color 0.2s ease, color 0.2s ease",
-    color: "#000",
-    fontFamily: "IBM Plex Mono, monospace",
-    fontSize: 14,
-    fontWeight: 700,
-  }}
->
-  X
-</button>
+            <h3
+              className="panel-title uppercase tracking-tight flex-1"
+              style={{
+                fontFamily: 'Neue Haas Grotesk Display, system-ui, sans-serif',
+                fontWeight: 700,
+                fontSize: '20px',
+                lineHeight: 1.1,
+                letterSpacing: '-0.02em',
+                color: '#111',
+              }}
+            >
+              {cardData.title}
+            </h3>
+
+            {/* CLOSE BUTTON BEM EXPLÍCITO */}
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close panel"
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 0,
+                border: '1px solid #111',
+                backgroundColor: '#FFFFFF',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: '#111',
+              }}
+            >
+              <X size={20} strokeWidth={2.2} />
+            </button>
+          </div>
+        </div>
 
         </div>
 
