@@ -179,27 +179,31 @@ export function SidePanel({ isOpen, onClose, cardData }: SidePanelProps) {
 
   return (
     <>
-      <div
-        className={`fixed inset-0 bg-black transition-opacity duration-200 z-40 ${
-          isOpen ? "opacity-20" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={onClose}
-      />
+     <div
+  className="fixed inset-0 bg-black transition-opacity duration-200"
+  style={{
+    opacity: isOpen ? 0.2 : 0,
+    pointerEvents: isOpen ? "auto" : "none",
+    zIndex: 999,
+  }}
+  onClick={onClose}
+/>
 
       <div
-        className={`side-panel fixed top-0 right-0 h-full transition-all duration-300 ease-in-out z-50 ${
-          isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-        }`}
-        style={{
-          width: "min(640px, 45vw)",
-          backgroundColor: "#FFFFFF",
-          borderLeft: "1px solid #111",
-          boxShadow: "-4px 0 24px rgba(0, 0, 0, 0.1)",
-          position: "fixed",
-          top: 0,
-          right: 0,
-        }}
-      >
+  className={`side-panel fixed top-0 right-0 h-full transition-all duration-300 ease-in-out ${
+    isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+  }`}
+  style={{
+    width: "min(640px, 45vw)",
+    backgroundColor: "#FFFFFF",
+    borderLeft: "1px solid #111",
+    boxShadow: "-4px 0 24px rgba(0, 0, 0, 0.1)",
+    position: "fixed",
+    top: 0,
+    right: 0,
+    zIndex: 1000,
+  }}
+>
         {/* Botão de fechar fixo */}
         <button
           type="button"
