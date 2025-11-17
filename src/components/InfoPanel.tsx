@@ -362,27 +362,32 @@ export function InfoPanel({ isOpen, onClose, type }: InfoPanelProps) {
 
   return (
     <>
-      <div
-        className={`fixed inset-0 bg-black transition-opacity duration-200 z-40 ${
-          isOpen ? "opacity-10" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={onClose}
-      />
+     <div
+  className="fixed inset-0 bg-black transition-opacity duration-200"
+  style={{
+    opacity: isOpen ? 0.1 : 0,
+    pointerEvents: isOpen ? "auto" : "none",
+    zIndex: 999,
+  }}
+  onClick={onClose}
+/>
 
-      <div
-        className={`info-panel fixed top-0 right-0 h-full transition-all duration-200 ease-out z-50 ${
-          isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-        }`}
-        style={{
-          width: "min(520px, 100vw)",
-          backgroundColor: "#FDFCFB",
-          borderLeft: "1px solid #111",
-          boxShadow: "-4px 0 24px rgba(0, 0, 0, 0.1)",
-          position: "fixed",
-          top: 0,
-          right: 0,
-        }}
-      >
+
+     <div
+  className={`info-panel fixed top-0 right-0 h-full transition-all duration-200 ease-out ${
+    isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+  }`}
+  style={{
+    width: "min(520px, 100vw)",
+    backgroundColor: "#FDFCFB",
+    borderLeft: "1px solid #111",
+    boxShadow: "-4px 0 24px rgba(0, 0, 0, 0.1)",
+    position: "fixed",
+    top: 0,
+    right: 0,
+    zIndex: 1000,
+  }}
+>
         {/* Botão de fechar fixo */}
         <button
           type="button"
