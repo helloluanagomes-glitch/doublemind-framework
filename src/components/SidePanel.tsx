@@ -183,7 +183,7 @@ export function SidePanel({ isOpen, onClose, cardData }: SidePanelProps) {
   };
 
   return (
-    <>
+    <div>
       {/* Backdrop */}
       <div
         className={`fixed inset-0 bg-black transition-opacity duration-200 z-40 ${
@@ -201,66 +201,57 @@ export function SidePanel({ isOpen, onClose, cardData }: SidePanelProps) {
           width: 'min(640px, 45vw)',
           backgroundColor: '#FFFFFF',
           borderLeft: '1px solid #111',
-          boxShadow: '-4px 0 24px rgba(0, 0, 0, 0.1)'
+          boxShadow: '-4px 0 24px rgba(0, 0, 0, 0.1)',
         }}
       >
-                {/* Panel Header - Fixed */}
+        {/* Panel Header - Fixed */}
         <div
-          className="panel-header"
+          className="panel-header flex items-center justify-between"
           style={{
             padding: '24px 32px',
             borderBottom: '1px solid #E0E0E0',
             position: 'sticky',
             top: 0,
             backgroundColor: '#FFFFFF',
-            zIndex: 50,
+            zIndex: 10,
           }}
         >
-          <div
+          <h3
+            className="panel-title uppercase tracking-tight flex-1"
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '16px',
+              fontFamily: 'Neue Haas Grotesk Display, system-ui, sans-serif',
+              fontWeight: 700,
+              fontSize: '20px',
+              lineHeight: 1.1,
+              letterSpacing: '-0.02em',
+              color: '#111',
             }}
           >
-            <h3
-              className="panel-title uppercase tracking-tight flex-1"
-              style={{
-                fontFamily: 'Neue Haas Grotesk Display, system-ui, sans-serif',
-                fontWeight: 700,
-                fontSize: '20px',
-                lineHeight: 1.1,
-                letterSpacing: '-0.02em',
-                color: '#111',
-              }}
-            >
-              {cardData.title}
-            </h3>
+            {cardData.title}
+          </h3>
 
-            {/* CLOSE BUTTON BEM EXPLÍCITO */}
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Close panel"
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 0,
-                border: '1px solid #111',
-                backgroundColor: '#FFFFFF',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                color: '#111',
-              }}
-            >
-              <X size={20} strokeWidth={2.2} />
-            </button>
-          </div>
-        </div>
-
+          {/* BOTÃO DE FECHAR */}
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close panel"
+            className="close-button flex-shrink-0"
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: 0,
+              border: '1px solid #111',
+              backgroundColor: '#FFF',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s ease, color 0.2s ease',
+              color: '#111',
+            }}
+          >
+            <X size={18} strokeWidth={2} />
+          </button>
         </div>
 
         {/* Confirmation Message */}
@@ -280,7 +271,7 @@ export function SidePanel({ isOpen, onClose, cardData }: SidePanelProps) {
               textTransform: 'uppercase',
               textAlign: 'center',
               zIndex: 9,
-              animation: 'slideDown 0.3s ease-out'
+              animation: 'slideDown 0.3s ease-out',
             }}
           >
             Tools updated for your current session
@@ -288,15 +279,15 @@ export function SidePanel({ isOpen, onClose, cardData }: SidePanelProps) {
         )}
 
         {/* Panel Content - Scrollable */}
-        <div 
+        <div
           className="panel-content overflow-y-auto"
-          style={{ 
+          style={{
             padding: '32px',
-            height: 'calc(100% - 89px)' // Subtract header height
+            height: 'calc(100% - 89px)', // Subtract header height
           }}
         >
           {/* Task Title */}
-          <h2 
+          <h2
             className="task-title"
             style={{
               fontFamily: 'Neue Haas Grotesk Display, system-ui, sans-serif',
@@ -305,440 +296,19 @@ export function SidePanel({ isOpen, onClose, cardData }: SidePanelProps) {
               lineHeight: 1.2,
               letterSpacing: '-0.02em',
               color: '#111',
-              marginBottom: '32px'
+              marginBottom: '32px',
             }}
           >
             {cardData.title}
           </h2>
 
           {/* AI Role */}
-          <div className="content-section" style={{ marginBottom: '32px' }}>
-            <div 
-              className="section-label uppercase mb-4"
-              style={{
-                fontFamily: 'IBM Plex Mono, monospace',
-                fontSize: '12px',
-                fontWeight: 600,
-                letterSpacing: '0.12em',
-                color: '#666',
-              }}
-            >
-              {t.aiRole}
-            </div>
-            <p 
-              className="section-body"
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '16px',
-                lineHeight: 1.7,
-                color: '#111',
-                fontWeight: 400
-              }}
-            >
-              {cardData.aiRole}
-            </p>
-          </div>
-
-          <div className="section-divider" style={{ height: '1px', backgroundColor: '#E6E6E6', marginBottom: '32px' }} />
-
-          {/* PD Role */}
-          <div className="content-section" style={{ marginBottom: '32px' }}>
-            <div 
-              className="section-label uppercase mb-4"
-              style={{
-                fontFamily: 'IBM Plex Mono, monospace',
-                fontSize: '12px',
-                fontWeight: 600,
-                letterSpacing: '0.12em',
-                color: '#666',
-              }}
-            >
-              {t.pdRole}
-            </div>
-            <p 
-              className="section-body"
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '16px',
-                lineHeight: 1.7,
-                color: '#111',
-                fontWeight: 400
-              }}
-            >
-              {cardData.pdRole}
-            </p>
-          </div>
-
-          <div className="section-divider" style={{ height: '1px', backgroundColor: '#E6E6E6', marginBottom: '32px' }} />
-
-          {/* Expected Results */}
-          <div className="content-section" style={{ marginBottom: '32px' }}>
-            <div 
-              className="section-label uppercase mb-4"
-              style={{
-                fontFamily: 'IBM Plex Mono, monospace',
-                fontSize: '12px',
-                fontWeight: 600,
-                letterSpacing: '0.12em',
-                color: '#666',
-              }}
-            >
-              {t.expectedResults}
-            </div>
-            <p 
-              className="section-body"
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '16px',
-                lineHeight: 1.7,
-                color: '#111',
-                fontWeight: 400
-              }}
-            >
-              {cardData.expectedResults}
-            </p>
-          </div>
-
-          <div className="section-divider" style={{ height: '1px', backgroundColor: '#E6E6E6', marginBottom: '32px' }} />
-
-          {/* AI Tools */}
-          <div className="content-section" style={{ marginBottom: '32px' }}>
-            <div 
-              className="section-label uppercase mb-4"
-              style={{
-                fontFamily: 'IBM Plex Mono, monospace',
-                fontSize: '12px',
-                fontWeight: 600,
-                letterSpacing: '0.12em',
-                color: '#666',
-              }}
-            >
-              {t.aiTools}
-            </div>
-            
-            {/* Default Tools */}
-            <div className="tools-wrapper flex flex-wrap gap-3 mb-3">
-              {cardData.aiTools.split(';').map((tool, index) => {
-                const toolUrl = getToolUrl(tool);
-                const trimmedTool = tool.trim();
-                
-                if (toolUrl) {
-                  return (
-                    <a
-                      key={index}
-                      href={toolUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="tool-tag-link group"
-                      style={{
-                        backgroundColor: '#FFF',
-                        padding: '8px 14px',
-                        border: '1px solid #E0E0E0',
-                        borderRadius: '0px',
-                        fontFamily: 'Inter, sans-serif',
-                        fontSize: '14px',
-                        fontWeight: 500,
-                        color: '#111',
-                        textDecoration: 'none',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        transition: 'all 0.2s ease',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      <span>{trimmedTool}</span>
-                      <ExternalLink size={14} strokeWidth={2} />
-                    </a>
-                  );
-                }
-                
-                return (
-                  <span
-                    key={index}
-                    className="tool-tag"
-                    style={{
-                      backgroundColor: '#FFF',
-                      padding: '8px 14px',
-                      border: '1px solid #E0E0E0',
-                      borderRadius: '0px',
-                      fontFamily: 'Inter, sans-serif',
-                      fontSize: '14px',
-                      fontWeight: 500,
-                      color: '#111',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px'
-                    }}
-                  >
-                    {trimmedTool}
-                  </span>
-                );
-              })}
-
-              {/* Custom Tools */}
-              {customTools.map((tool, index) => (
-                <div
-                  key={`custom-${index}`}
-                  className="custom-tool-wrapper"
-                  style={{
-                    position: 'relative',
-                    display: 'inline-flex',
-                    alignItems: 'center'
-                  }}
-                >
-                  <a
-                    href={tool.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="tool-tag-link custom group"
-                    style={{
-                      backgroundColor: '#E95F9C',
-                      padding: '8px 14px',
-                      paddingRight: isEditingTools ? '40px' : '14px',
-                      border: '2px solid #000',
-                      borderRadius: '0px',
-                      fontFamily: 'Inter, sans-serif',
-                      fontSize: '14px',
-                      fontWeight: 700,
-                      color: '#000',
-                      textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      transition: 'all 0.2s ease',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    <span>{tool.name}</span>
-                    <ExternalLink size={14} strokeWidth={2.5} />
-                  </a>
-                  
-                  {isEditingTools && (
-                    <div
-                      className="tool-actions"
-                      style={{
-                        position: 'absolute',
-                        right: '8px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        display: 'flex',
-                        gap: '4px',
-                        zIndex: 1
-                      }}
-                    >
-                      <button
-                        onClick={() => handleEditTool(index)}
-                        className="tool-action-btn"
-                        style={{
-                          padding: '4px',
-                          backgroundColor: 'transparent',
-                          border: 'none',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: '#000'
-                        }}
-                      >
-                        <Edit2 size={14} strokeWidth={2.5} />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteTool(index)}
-                        className="tool-action-btn"
-                        style={{
-                          padding: '4px',
-                          backgroundColor: 'transparent',
-                          border: 'none',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: '#000'
-                        }}
-                      >
-                        <X size={16} strokeWidth={2.5} />
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Add/Edit Tools Button */}
-            <button
-              onClick={handleToggleEditMode}
-              className="add-edit-tools-btn"
-              style={{
-                fontFamily: 'IBM Plex Mono, monospace',
-                fontSize: '11px',
-                fontWeight: 600,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: '#000',
-                backgroundColor: 'transparent',
-                border: 'none',
-                padding: '8px 0',
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                transition: 'all 0.2s ease',
-                marginBottom: isEditingTools ? '16px' : '0'
-              }}
-            >
-              {isEditingTools ? (
-                <Minus size={14} strokeWidth={2.5} />
-              ) : (
-                <Plus size={14} strokeWidth={2.5} />
-              )}
-              {isEditingTools ? t.closeEditor : t.addEditTools}
-            </button>
-
-            {/* Tool Editor */}
-            {isEditingTools && (
-              <div
-                className="tool-editor"
-                style={{
-                  backgroundColor: '#F5F5F5',
-                  padding: '16px',
-                  borderRadius: '0px',
-                  border: '1px solid #E0E0E0',
-                  marginTop: '12px'
-                }}
-              >
-                <div
-                  className="editor-title"
-                  style={{
-                    fontFamily: 'IBM Plex Mono, monospace',
-                    fontSize: '11px',
-                    fontWeight: 600,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    color: '#666',
-                    marginBottom: '12px'
-                  }}
-                >
-                  {editingIndex !== null ? 'Edit Tool' : 'Add New Tool'}
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <input
-                    type="text"
-                    value={newToolName}
-                    onChange={(e) => setNewToolName(e.target.value)}
-                    placeholder="Tool Name"
-                    style={{
-                      padding: '10px 14px',
-                      border: '1px solid #D0D0D0',
-                      borderRadius: '0px',
-                      fontFamily: 'Inter, sans-serif',
-                      fontSize: '14px',
-                      fontWeight: 500,
-                      color: '#111',
-                      backgroundColor: '#FFF',
-                      outline: 'none'
-                    }}
-                  />
-                  <input
-                    type="url"
-                    value={newToolUrl}
-                    onChange={(e) => setNewToolUrl(e.target.value)}
-                    placeholder="https://example.com"
-                    style={{
-                      padding: '10px 14px',
-                      border: '1px solid #D0D0D0',
-                      borderRadius: '0px',
-                      fontFamily: 'Inter, sans-serif',
-                      fontSize: '14px',
-                      fontWeight: 500,
-                      color: '#111',
-                      backgroundColor: '#FFF',
-                      outline: 'none'
-                    }}
-                  />
-                  <div style={{ display: 'flex', gap: '8px' }}>
-                    <button
-                      onClick={editingIndex !== null ? handleUpdateTool : handleAddTool}
-                      disabled={!newToolName.trim() || !newToolUrl.trim()}
-                      style={{
-                        flex: 1,
-                        padding: '10px 16px',
-                        backgroundColor: '#E95F9C',
-                        color: '#000',
-                        border: '2px solid #000',
-                        borderRadius: '0px',
-                        fontFamily: 'IBM Plex Mono, monospace',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        letterSpacing: '0.08em',
-                        textTransform: 'uppercase',
-                        cursor: newToolName.trim() && newToolUrl.trim() ? 'pointer' : 'not-allowed',
-                        opacity: newToolName.trim() && newToolUrl.trim() ? 1 : 0.5,
-                        transition: 'all 0.2s ease'
-                      }}
-                    >
-                      {editingIndex !== null ? 'Update' : 'Add Tool'}
-                    </button>
-                    {editingIndex !== null && (
-                      <button
-                        onClick={handleCancelEdit}
-                        style={{
-                          padding: '10px 16px',
-                          backgroundColor: '#FFF',
-                          color: '#111',
-                          border: '1px solid #D0D0D0',
-                          borderRadius: '0px',
-                          fontFamily: 'IBM Plex Mono, monospace',
-                          fontSize: '11px',
-                          fontWeight: 600,
-                          letterSpacing: '0.08em',
-                          textTransform: 'uppercase',
-                          cursor: 'pointer',
-                          transition: 'all 0.2s ease'
-                        }}
-                      >
-                        Cancel
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="section-divider" style={{ height: '1px', backgroundColor: '#E6E6E6', marginBottom: '32px' }} />
-
-          {/* Prompt Suggestion */}
-          <div className="content-section" style={{ marginBottom: '80px' }}>
-            <div 
-              className="section-label uppercase mb-4"
-              style={{
-                fontFamily: 'IBM Plex Mono, monospace',
-                fontSize: '12px',
-                fontWeight: 600,
-                letterSpacing: '0.12em',
-                color: '#666',
-              }}
-            >
-              {t.promptSuggestion}
-            </div>
-            <p 
-              className="prompt-text italic mb-6"
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '16px',
-                lineHeight: 1.7,
-                color: '#333',
-                fontWeight: 400
-              }}
-            >
-              {cardData.promptSuggestion}
-            </p>
-          </div>
+          {/* (DAQUI PRA BAIXO você pode manter exatamente igual ao que já está:
+              AI Role, PD Role, Expected Results, AI Tools, editor, prompt etc.) */}
         </div>
 
         {/* Sticky Footer with Copy Button */}
-        <div 
+        <div
           className="panel-footer"
           style={{
             position: 'sticky',
@@ -746,7 +316,7 @@ export function SidePanel({ isOpen, onClose, cardData }: SidePanelProps) {
             backgroundColor: '#FFFFFF',
             borderTop: '1px solid #E6E6E6',
             padding: '16px 32px',
-            zIndex: 10
+            zIndex: 10,
           }}
         >
           <button
@@ -758,7 +328,7 @@ export function SidePanel({ isOpen, onClose, cardData }: SidePanelProps) {
               fontWeight: 600,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              borderRadius: '0px'
+              borderRadius: '0px',
             }}
           >
             {copied ? (
@@ -916,6 +486,6 @@ export function SidePanel({ isOpen, onClose, cardData }: SidePanelProps) {
           }
         }
       `}</style>
-    </>
+    </div>
   );
 }
