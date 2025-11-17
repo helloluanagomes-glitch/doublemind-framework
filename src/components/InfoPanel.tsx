@@ -2,11 +2,7 @@ import { X, ExternalLink, Download } from "lucide-react";
 import { useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 
-export type InfoPanelType =
-  | "about"
-  | "download"
-  | "partner"
-  | null;
+export type InfoPanelType = "about" | "download" | "partner" | null;
 
 interface InfoPanelProps {
   isOpen: boolean;
@@ -14,14 +10,9 @@ interface InfoPanelProps {
   type: InfoPanelType;
 }
 
-export function InfoPanel({
-  isOpen,
-  onClose,
-  type,
-}: InfoPanelProps) {
+export function InfoPanel({ isOpen, onClose, type }: InfoPanelProps) {
   const { t } = useLanguage();
 
-  // Close on Escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
@@ -30,11 +21,9 @@ export function InfoPanel({
     };
 
     window.addEventListener("keydown", handleEscape);
-    return () =>
-      window.removeEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
   }, [isOpen, onClose]);
 
-  // Prevent body scroll when panel is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -46,20 +35,7 @@ export function InfoPanel({
     };
   }, [isOpen]);
 
-  // Focus management
-  useEffect(() => {
-    if (isOpen) {
-      const closeButton = document.querySelector(
-        ".info-panel-close",
-      ) as HTMLElement;
-      if (closeButton) {
-        setTimeout(() => closeButton.focus(), 100);
-      }
-    }
-  }, [isOpen]);
-
   const handleDownload = (pdfType: string) => {
-    // Placeholder for download functionality
     const downloadPath = `/downloads/doublemind-${pdfType}.pdf`;
     console.log(`Downloading ${pdfType} PDF: ${downloadPath}`);
     alert(`Download feature for ${pdfType} PDF coming soon!`);
@@ -93,9 +69,8 @@ export function InfoPanel({
                 marginBottom: "16px",
               }}
             >
-              DoubleMind is a living framework created by{" "}
-              <strong>Luana Gomes</strong>, a Product Designer
-              exploring how AI can make design work smarter.
+              DoubleMind is a living framework created by <strong>Luana Gomes</strong>, a Product
+              Designer exploring how AI can make design work smarter.
             </p>
             <p
               style={{
@@ -112,12 +87,10 @@ export function InfoPanel({
                 href="https://luanagomes-portfolio.squarespace.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="info-panel-link"
                 style={{
                   color: "#111",
                   textDecoration: "underline",
                   textUnderlineOffset: "3px",
-                  transition: "color 0.2s ease",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "4px",
@@ -132,12 +105,10 @@ export function InfoPanel({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Open Luana Gomes on LinkedIn"
-                className="info-panel-link"
                 style={{
                   color: "#111",
                   textDecoration: "underline",
                   textUnderlineOffset: "3px",
-                  transition: "color 0.2s ease",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "4px",
@@ -149,7 +120,6 @@ export function InfoPanel({
               to learn more about her work.
             </p>
 
-            {/* Footer Copyright */}
             <div
               style={{
                 paddingTop: "24px",
@@ -195,15 +165,12 @@ export function InfoPanel({
                 gap: "16px",
               }}
             >
-              {/* Empty PDF Option */}
               <div
-                className="download-option"
                 style={{
                   border: "1px solid #E0E0E0",
-                  borderRadius: "0px",
+                  borderRadius: 0,
                   padding: "20px",
                   backgroundColor: "#FFF",
-                  transition: "all 0.2s ease",
                 }}
               >
                 <h3
@@ -231,19 +198,17 @@ export function InfoPanel({
                 </p>
                 <button
                   onClick={() => handleDownload("empty")}
-                  className="download-btn"
                   style={{
                     width: "100%",
                     padding: "12px 20px",
                     backgroundColor: "#111",
                     color: "#FFF",
                     border: "none",
-                    borderRadius: "0px",
+                    borderRadius: 0,
                     fontFamily: "IBM Plex Sans, sans-serif",
                     fontSize: "14px",
                     fontWeight: 600,
                     cursor: "pointer",
-                    transition: "background-color 0.2s ease",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -255,15 +220,12 @@ export function InfoPanel({
                 </button>
               </div>
 
-              {/* Complete PDF Option */}
               <div
-                className="download-option"
                 style={{
                   border: "1px solid #E0E0E0",
-                  borderRadius: "0px",
+                  borderRadius: 0,
                   padding: "20px",
                   backgroundColor: "#FFF",
-                  transition: "all 0.2s ease",
                 }}
               >
                 <h3
@@ -291,19 +253,17 @@ export function InfoPanel({
                 </p>
                 <button
                   onClick={() => handleDownload("complete")}
-                  className="download-btn"
                   style={{
                     width: "100%",
                     padding: "12px 20px",
                     backgroundColor: "#111",
                     color: "#FFF",
                     border: "none",
-                    borderRadius: "0px",
+                    borderRadius: 0,
                     fontFamily: "IBM Plex Sans, sans-serif",
                     fontSize: "14px",
                     fontWeight: 600,
                     cursor: "pointer",
-                    transition: "background-color 0.2s ease",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -385,7 +345,7 @@ export function InfoPanel({
                 lineHeight: 1.5,
                 color: "#111",
                 fontWeight: 400,
-                marginBottom: "0",
+                marginBottom: 0,
               }}
             >
               {t.partnerParagraph3}
@@ -402,153 +362,87 @@ export function InfoPanel({
 
   return (
     <>
-      {/* Backdrop */}
       <div
         className={`fixed inset-0 bg-black transition-opacity duration-200 z-40 ${
-          isOpen
-            ? "opacity-10"
-            : "opacity-0 pointer-events-none"
+          isOpen ? "opacity-10" : "opacity-0 pointer-events-none"
         }`}
         onClick={onClose}
       />
 
-      {/* Panel */}
       <div
         className={`info-panel fixed top-0 right-0 h-full transition-all duration-200 ease-out z-50 ${
-          isOpen
-            ? "translate-x-0 opacity-100"
-            : "translate-x-full opacity-0"
+          isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         }`}
         style={{
           width: "min(520px, 100vw)",
           backgroundColor: "#FDFCFB",
           borderLeft: "1px solid #111",
           boxShadow: "-4px 0 24px rgba(0, 0, 0, 0.1)",
+          position: "fixed",
+          top: 0,
+          right: 0,
         }}
       >
-        {/* Panel Header - Fixed */}
+        {/* Botão de fechar fixo */}
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close panel"
+          style={{
+            position: "absolute",
+            top: 16,
+            right: 16,
+            width: 32,
+            height: 32,
+            borderRadius: 0,
+            border: "1px solid #111",
+            backgroundColor: "#FFF",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            transition: "background-color 0.2s ease, color 0.2s ease",
+            color: "#111",
+            zIndex: 60,
+          }}
+          className="info-panel-close"
+        >
+          <X size={18} strokeWidth={2} />
+        </button>
+
         <div
           className="info-panel-header"
           style={{
-            padding: "24px",
-            borderBottom: "1px solid #E0E0E0",
-            position: "sticky",
-            top: 0,
-            backgroundColor: "#FDFCFB",
-            zIndex: 50,
+            padding: "24px 24px 0 24px",
           }}
         >
-          <div
+          <h2
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "16px",
+              fontFamily: "Neue Haas Grotesk Display, system-ui, sans-serif",
+              fontWeight: 700,
+              fontSize: "18px",
+              lineHeight: 1.1,
+              letterSpacing: "-0.02em",
+              color: "#111",
+              marginBottom: "16px",
+              paddingRight: "56px",
+              textTransform: "uppercase",
             }}
           >
-            <h2
-              className="uppercase tracking-tight flex-1"
-              style={{
-                fontFamily:
-                  "Neue Haas Grotesk Display, system-ui, sans-serif",
-                fontWeight: 700,
-                fontSize: "18px",
-                lineHeight: 1.1,
-                letterSpacing: "-0.02em",
-                color: "#111",
-              }}
-            >
-              {getPanelTitle()}
-            </h2>
-
-            {/* CLOSE BUTTON BEM EXPLÍCITO */}
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Close panel"
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 0,
-                border: "1px solid #111",
-                backgroundColor: "#FFFFFF",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                color: "#111",
-              }}
-            >
-              <X size={20} strokeWidth={2.2} />
-            </button>
-          </div>
+            {getPanelTitle()}
+          </h2>
         </div>
 
-
-        {/* Panel Content - Scrollable */}
         <div
           className="info-panel-content overflow-y-auto"
           style={{
-            padding: "24px",
-            height: "calc(100% - 89px)",
+            padding: "0 24px 24px 24px",
+            height: "100%",
           }}
         >
           {renderContent()}
         </div>
       </div>
-
-      {/* Styles */}
-      <style>{`
-        .info-panel-close:hover {
-          background-color: #000 !important;
-          color: #FFF !important;
-        }
-
-        .info-panel-link:hover {
-          color: #FF5FBF !important;
-        }
-
-        .download-btn:hover,
-        .partner-submit-btn:hover {
-          background-color: #FF5FBF !important;
-        }
-
-        @media (max-width: 768px) {
-          .info-panel {
-            width: 100vw !important;
-            height: 100vh !important;
-            border-left: none !important;
-            transition: transform 240ms ease-out, opacity 240ms ease-out !important;
-          }
-          
-          .info-panel.translate-x-full {
-            transform: translateY(100%) !important;
-          }
-          
-          .info-panel.translate-x-0 {
-            transform: translateY(0) !important;
-          }
-
-          .info-panel-header {
-            padding: 16px !important;
-          }
-
-          .info-panel-header h2 {
-            font-size: 16px !important;
-          }
-
-          .info-panel-content {
-            padding: 16px !important;
-            height: calc(100vh - 73px) !important;
-          }
-
-          .download-btn,
-          .partner-submit-btn {
-            width: 100% !important;
-            justify-content: center !important;
-          }
-        }
-      `}</style>
     </>
   );
 }
