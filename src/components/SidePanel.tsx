@@ -266,9 +266,27 @@ export function SidePanel({ isOpen, onClose, cardData }: SidePanelProps) {
               marginBottom: "32px",
               paddingRight: "56px",
             }}
-          >
+<h2 ...>
             {cardData.title}
           </h2>
+<button
+  type="button"
+  onClick={onClose}
+  style={{
+    marginBottom: 24,
+    padding: "8px 12px",
+    border: "1px solid #111",
+    backgroundColor: "#FFF",
+    fontFamily: "IBM Plex Mono, monospace",
+    fontSize: "11px",
+    fontWeight: 600,
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+    cursor: "pointer",
+  }}
+>
+  Close panel
+</button>
 
           <div style={{ marginBottom: "32px" }}>
             <div
