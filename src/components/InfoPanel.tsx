@@ -434,15 +434,30 @@ export function InfoPanel({ isOpen, onClose, type }: InfoPanelProps) {
         </div>
 
         <div
-          className="info-panel-content overflow-y-auto"
-          style={{
-            padding: "0 24px 24px 24px",
-            height: "100%",
-          }}
-        >
-          {renderContent()}
-        </div>
-      </div>
-    </>
-  );
-}
+  className="info-panel-content overflow-y-auto"
+  style={{
+    padding: "24px",
+    height: "calc(100% - 89px)",
+  }}
+>
+  {renderContent()}
+
+  <button
+    type="button"
+    onClick={onClose}
+    style={{
+      marginTop: 24,
+      padding: "8px 12px",
+      border: "1px solid #111",
+      backgroundColor: "#FFF",
+      fontFamily: "IBM Plex Mono, monospace",
+      fontSize: "11px",
+      fontWeight: 600,
+      letterSpacing: "0.08em",
+      textTransform: "uppercase",
+      cursor: "pointer",
+    }}
+  >
+    Close panel
+  </button>
+</div>
